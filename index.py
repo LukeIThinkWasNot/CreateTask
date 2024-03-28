@@ -1,31 +1,44 @@
-# Simple pygame program
+ 
+import pygame 
+  
+screen = pygame.display.set_mode((1000, 1000)) 
+pygame.display.set_caption('LA | Mini create task - TikTakToe') 
 
-# Import and initialize the pygame library
-import pygame
-pygame.init()
+def draw_board(screen):
+	# Lines down
+	pygame.draw.line(screen, "#000000", [screen.get_width() / 3, 0], [screen.get_width() / 3, screen.get_height()], 20)
+	pygame.draw.line(screen, "#000000", [(screen.get_width() / 3) * 2, 0], [(screen.get_width() / 3) * 2, screen.get_height()], 20)
 
-# Set up the drawing window
-screen = pygame.display.set_mode([500, 500])
+	# Lines across
+	pygame.draw.line(screen, "#000000", [0, screen.get_height()/3], [screen.get_width(), screen.get_height()/3], 20)
+	pygame.draw.line(screen, "#000000", [0, (screen.get_height()/3) * 2], [screen.get_width(), (screen.get_height()/3) * 2], 20)
 
-# Run until the user asks to quit
+def draw_circle(x, y):
+	pygame.draw.circle(screen, "#000000", [x, y], 40, 0)
+	
+
+background_color = (234, 212, 252) 
+currentTurn = 'X'
+placesUsed = []
+
+screen.fill(background_color) 
+  
+pygame.display.flip() 
+
 running = True
-while running:
+  
+while running: 
+	
+	for event in pygame.event.get():
+	  
+		if event.type == pygame.QUIT:
+			running = False
 
-    # Did the user click the window close button?
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+	draw_board(screen)
+	
+	draw_circle(screen.get_width() / 6, screen.get_height() / 6) # Top left circle
 
-    # Fill the background with white
-    screen.fill((255, 255, 255))
+	# pygame.draw.line(screen, "#000000", [(screen.get_width() / 3) * x, (screen.get_height() / 3) * y], [(screen.get_width() / 3) * (x + 1), (screen.get_height() / 3) * (y + 1)], 20)
+	# pygame.draw.line(screen, "#000000", [(screen.get_width() / 3) * (x + 1), (screen.get_height() / 3) * y], [(screen.get_width() / 3) * x, (screen.get_height() / 3) * (y + 1)], 20)
 
-    # Draw a solid blue circle in the center
-    pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
-
-    # Flip the display
-    pygame.display.flip()
-
-print("e")
-
-# Done! Time to quit.
-pygame.quit()
+	pygame.display.flip()
