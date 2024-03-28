@@ -1,0 +1,1 @@
+py -m jurigged -v index.py
